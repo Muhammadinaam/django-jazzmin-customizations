@@ -3,33 +3,27 @@
 
 {% block extrastyle %}
     {{ block.super }}
-    {% get_current_language as LANGUAGE_CODE %}
+    {# Automatically load custom CSS #}
+    <link rel="stylesheet" href="{% static 'jazzmin_customizations/custom.css' %}">
     
-    {# RTL Support #}
+    {# Load RTL CSS for RTL languages #}
+    {% get_current_language as LANGUAGE_CODE %}
     {% if LANGUAGE_CODE in RTL_LANGUAGES %}
         <link rel="stylesheet" href="{% static 'admin/css/rtl_admin.css' %}">
     {% endif %}
-    
-    {# Multiple Custom CSS Files Support #}
-    {% for css_file in JAZZMIN_CUSTOM_CSS_FILES %}
-        <link rel="stylesheet" href="{% static css_file %}">
-    {% endfor %}
 {% endblock %}
 
 {% block extrahead %}
     {{ block.super }}
-    {% get_current_language as LANGUAGE_CODE %}
+    {# Automatically load custom JS for sidebar search #}
+    <script src="{% static 'jazzmin_customizations/custom.js' %}"></script>
     
-    {# RTL Direction #}
+    {# Set RTL direction for RTL languages #}
+    {% get_current_language as LANGUAGE_CODE %}
     {% if LANGUAGE_CODE in RTL_LANGUAGES %}
         <script>
             document.documentElement.setAttribute('dir', 'rtl');
         </script>
     {% endif %}
-    
-    {# Multiple Custom JS Files Support #}
-    {% for js_file in JAZZMIN_CUSTOM_JS_FILES %}
-        <script src="{% static js_file %}"></script>
-    {% endfor %}
 {% endblock %}
 

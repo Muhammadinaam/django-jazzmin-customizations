@@ -6,6 +6,7 @@ A comprehensive, reusable app that supercharges your Django Jazzmin admin with:
 - ✅ **RTL Support** - Perfect layout for Arabic, Urdu, Hebrew, Persian
 - ✅ **Sidebar Search** - Real-time search functionality  
 - ✅ **Custom Menus** - Organize models into custom categories
+- ✅ **Auto-Loading CSS/JS** - No manual configuration needed!
 - ✅ **Zero Configuration** - Works out of the box!
 
 ---
@@ -55,38 +56,6 @@ TEMPLATES = [
 ]
 ```
 
-### 4. Configure Jazzmin Settings
-
-Update your Jazzmin settings:
-
-```python
-JAZZMIN_SETTINGS = {
-    # ... your other settings ...
-    
-    # Enable sidebar search and RTL CSS
-    "custom_css": "jazzmin_custom_sidebar/sidebar_search.css",
-    "custom_js": "jazzmin_custom_sidebar/sidebar_search.js",
-    
-    # Enable language chooser (optional)
-    "language_chooser": True,
-}
-
-# Define RTL languages
-RTL_LANGUAGES = ['ar', 'ur', 'fa', 'he']  # Arabic, Urdu, Persian, Hebrew
-
-# Define custom admin menu (optional)
-CUSTOM_ADMIN_MENU = {
-    'User Management': [
-        'auth.User',
-        'auth.Group',
-    ],
-    'Your App': [
-        'main.YourModel',
-        'main.AnotherModel',
-    ],
-}
-```
-
 ### 4. Collect Static Files & Restart
 
 ```bash
@@ -98,59 +67,6 @@ python manage.py runserver
 - Searchable sidebar
 - Custom menu organization
 - Perfect RTL layout (when using RTL languages)
-
----
-
-## 🎨 Multiple CSS/JS Files Support (NEW!)
-
-Jazzmin only allows **one** `custom_css` and **one** `custom_js`. This app extends that to support **multiple files**!
-
-### Option 1: Use Array Settings (Recommended)
-
-```python
-# settings.py
-JAZZMIN_CUSTOM_CSS = [
-    'jazzmin_customizations/custom.css',
-    'your_app/admin-theme.css',
-    'your_app/custom-widgets.css',
-]
-
-JAZZMIN_CUSTOM_JS = [
-    'jazzmin_customizations/custom.js',
-    'your_app/admin-functions.js',
-    'your_app/analytics.js',
-]
-
-# Add the context processor
-TEMPLATES = [
-    {
-        'OPTIONS': {
-            'context_processors': [
-                # ... other processors
-                'jazzmin_customizations.context_processors.rtl_languages',
-                'jazzmin_customizations.context_processors.jazzmin_custom_assets',  # ← Add this!
-            ],
-        },
-    },
-]
-```
-
-### Option 2: Backward Compatible (Single File)
-
-Still works with standard Jazzmin settings:
-
-```python
-JAZZMIN_SETTINGS = {
-    "custom_css": "jazzmin_customizations/custom.css",
-    "custom_js": "jazzmin_customizations/custom.js",
-}
-```
-
-### Benefits:
-- ✅ Load multiple CSS themes
-- ✅ Organize CSS/JS by feature
-- ✅ Add analytics, widgets, third-party libraries
-- ✅ Fully backward compatible
 
 ---
 
@@ -276,16 +192,23 @@ CUSTOM_ADMIN_MENU = {
 ### Jazzmin Settings
 
 ```python
+# CSS and JS are automatically loaded by the app's base_site.html template!
+# No need to configure custom_css or custom_js
+
 JAZZMIN_SETTINGS = {
-    # ... other settings ...
-    
-    # Required for this app
-    "custom_css": "jazzmin_custom_sidebar/sidebar_search.css",
-    "custom_js": "jazzmin_custom_sidebar/sidebar_search.js",
+    # ... your other settings ...
     
     # Optional but recommended
     "language_chooser": True,  # Show language selector
     "show_version": False,     # Hide Django version
+}
+
+# Define RTL languages (optional)
+RTL_LANGUAGES = ['ar', 'ur', 'fa', 'he']
+
+# Define custom menu (optional)
+CUSTOM_ADMIN_MENU = {
+    'User Management': ['auth.User', 'auth.Group'],
 }
 ```
 
@@ -384,12 +307,12 @@ TEMPLATES = [{
     },
 }]
 
-JAZZMIN_SETTINGS = {
-    "custom_css": "jazzmin_custom_sidebar/sidebar_search.css",
-    "custom_js": "jazzmin_custom_sidebar/sidebar_search.js",
-}
-
+# CSS and JS are automatically loaded!
 RTL_LANGUAGES = ['ar', 'ur']
+
+JAZZMIN_SETTINGS = {
+    "language_chooser": True,  # Optional
+}
 ```
 
 ### Example 2: With Custom Menu
@@ -419,8 +342,7 @@ MIDDLEWARE = [
 
 JAZZMIN_SETTINGS = {
     "language_chooser": True,
-    "custom_css": "jazzmin_custom_sidebar/sidebar_search.css",
-    "custom_js": "jazzmin_custom_sidebar/sidebar_search.js",
+    # CSS and JS are automatically loaded by the app!
 }
 ```
 
@@ -451,20 +373,19 @@ RTL_LANGUAGES = ['ar', 'ur']
 
 ### Sidebar Search Not Working
 
-**Check 1:** Are CSS and JS loaded?
-```python
-JAZZMIN_SETTINGS = {
-    "custom_css": "jazzmin_custom_sidebar/sidebar_search.css",
-    "custom_js": "jazzmin_custom_sidebar/sidebar_search.js",
-}
-```
-
-**Check 2:** Did you collect static files?
+**Check 1:** Did you collect static files?
 ```bash
 python manage.py collectstatic
 ```
 
+**Check 2:** Is the app in INSTALLED_APPS?
+```python
+INSTALLED_APPS = ['jazzmin_customizations']
+```
+
 **Check 3:** Check browser console for errors
+- The CSS and JS are automatically loaded via `base_site.html`
+- Check DevTools Network tab to see if files are loading
 
 ### Custom Menu Not Showing
 
