@@ -17,7 +17,7 @@ A comprehensive, reusable app that supercharges your Django Jazzmin admin with:
 Install directly from GitHub:
 
 ```bash
-pip install git+https://github.com/yourusername/django-jazzmin-customizations.git
+pip install git+https://github.com/Muhammadinaam/django-jazzmin-customizations.git
 ```
 
 Or if you have the source code, copy the `jazzmin_customizations` folder to your project
@@ -466,10 +466,10 @@ Edit `static/jazzmin_custom_sidebar/sidebar_search.js`.
 
 ```bash
 # Install in any Django project
-pip install git+https://github.com/yourusername/django-jazzmin-customizations.git
+pip install git+https://github.com/Muhammadinaam/django-jazzmin-customizations.git
 
 # Or install a specific version
-pip install git+https://github.com/yourusername/django-jazzmin-customizations.git@v1.0.0
+pip install git+https://github.com/Muhammadinaam/django-jazzmin-customizations.git@v1.0.0
 ```
 
 Then follow the Quick Install steps above. That's it! 🎉
@@ -577,7 +577,7 @@ git push origin v1.1.0
 **3. Installing in Other Projects**
 ```bash
 # Install from GitHub
-pip install git+https://github.com/yourusername/django-jazzmin-customizations.git@v1.1.0
+pip install git+https://github.com/Muhammadinaam/django-jazzmin-customizations.git@v1.1.0
 
 # Use without 'apps.' prefix
 INSTALLED_APPS = ['jazzmin_customizations']
