@@ -25,15 +25,15 @@ Or if you have the source code, copy the `jazzmin_customizations` folder to your
 
 ### 2. Add to INSTALLED_APPS
 
-In your `settings.py`, add the app **before** your main app:
+⚠️ **IMPORTANT:** Add `jazzmin_customizations` **BEFORE** `jazzmin` in `INSTALLED_APPS` for templates to work!
 
 ```python
 INSTALLED_APPS = [
+    'jazzmin_customizations',  # ⚠️ MUST come BEFORE jazzmin!
     'jazzmin',
     'django.contrib.admin',
     # ... other Django apps ...
-    'jazzmin_customizations',  # Add this!
-    'apps.main',                # Your main app
+    'apps.main',
 ]
 ```
 
@@ -292,9 +292,9 @@ pip install django-jazzmin
 ```python
 # settings.py
 INSTALLED_APPS = [
+    'jazzmin_customizations',  # Must come BEFORE jazzmin
     'jazzmin',
     'django.contrib.admin',
-    'jazzmin_customizations',
 ]
 
 TEMPLATES = [{
@@ -352,9 +352,13 @@ JAZZMIN_SETTINGS = {
 
 ### RTL CSS Not Loading
 
-**Check 1:** Is app in `INSTALLED_APPS`?
+**Check 1:** Is app in `INSTALLED_APPS` **BEFORE** jazzmin?
 ```python
-INSTALLED_APPS = ['jazzmin_customizations']
+INSTALLED_APPS = [
+    'jazzmin_customizations',  # Must come BEFORE jazzmin
+    'jazzmin',
+    # ...
+]
 ```
 
 **Check 2:** Is `APP_DIRS` enabled?
@@ -378,9 +382,13 @@ RTL_LANGUAGES = ['ar', 'ur']
 python manage.py collectstatic
 ```
 
-**Check 2:** Is the app in INSTALLED_APPS?
+**Check 2:** Is the app in INSTALLED_APPS **BEFORE** jazzmin?
 ```python
-INSTALLED_APPS = ['jazzmin_customizations']
+INSTALLED_APPS = [
+    'jazzmin_customizations',  # Must come BEFORE jazzmin
+    'jazzmin',
+    # ...
+]
 ```
 
 **Check 3:** Check browser console for errors

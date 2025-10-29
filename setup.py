@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="django-jazzmin-customizations",
-    version="1.1.0",
+    version="1.1.1",
     author="Muhammad Inaam",
     author_email="your.email@example.com",
     description="The ultimate plug-and-play Django app for Jazzmin admin theme with RTL support, sidebar search, and custom menus",
