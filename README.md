@@ -101,6 +101,59 @@ python manage.py runserver
 
 ---
 
+## 🎨 Multiple CSS/JS Files Support (NEW!)
+
+Jazzmin only allows **one** `custom_css` and **one** `custom_js`. This app extends that to support **multiple files**!
+
+### Option 1: Use Array Settings (Recommended)
+
+```python
+# settings.py
+JAZZMIN_CUSTOM_CSS = [
+    'jazzmin_customizations/custom.css',
+    'your_app/admin-theme.css',
+    'your_app/custom-widgets.css',
+]
+
+JAZZMIN_CUSTOM_JS = [
+    'jazzmin_customizations/custom.js',
+    'your_app/admin-functions.js',
+    'your_app/analytics.js',
+]
+
+# Add the context processor
+TEMPLATES = [
+    {
+        'OPTIONS': {
+            'context_processors': [
+                # ... other processors
+                'jazzmin_customizations.context_processors.rtl_languages',
+                'jazzmin_customizations.context_processors.jazzmin_custom_assets',  # ← Add this!
+            ],
+        },
+    },
+]
+```
+
+### Option 2: Backward Compatible (Single File)
+
+Still works with standard Jazzmin settings:
+
+```python
+JAZZMIN_SETTINGS = {
+    "custom_css": "jazzmin_customizations/custom.css",
+    "custom_js": "jazzmin_customizations/custom.js",
+}
+```
+
+### Benefits:
+- ✅ Load multiple CSS themes
+- ✅ Organize CSS/JS by feature
+- ✅ Add analytics, widgets, third-party libraries
+- ✅ Fully backward compatible
+
+---
+
 ## Features
 
 ### 🌍 RTL Support

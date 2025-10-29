@@ -4,18 +4,32 @@
 {% block extrastyle %}
     {{ block.super }}
     {% get_current_language as LANGUAGE_CODE %}
+    
+    {# RTL Support #}
     {% if LANGUAGE_CODE in RTL_LANGUAGES %}
         <link rel="stylesheet" href="{% static 'admin/css/rtl_admin.css' %}">
     {% endif %}
+    
+    {# Multiple Custom CSS Files Support #}
+    {% for css_file in JAZZMIN_CUSTOM_CSS_FILES %}
+        <link rel="stylesheet" href="{% static css_file %}">
+    {% endfor %}
 {% endblock %}
 
 {% block extrahead %}
     {{ block.super }}
     {% get_current_language as LANGUAGE_CODE %}
+    
+    {# RTL Direction #}
     {% if LANGUAGE_CODE in RTL_LANGUAGES %}
         <script>
             document.documentElement.setAttribute('dir', 'rtl');
         </script>
     {% endif %}
+    
+    {# Multiple Custom JS Files Support #}
+    {% for js_file in JAZZMIN_CUSTOM_JS_FILES %}
+        <script src="{% static js_file %}"></script>
+    {% endfor %}
 {% endblock %}
 
