@@ -1,0 +1,21 @@
+{% extends "admin/base.html" %}
+{% load i18n static %}
+
+{% block extrastyle %}
+    {{ block.super }}
+    {% get_current_language as LANGUAGE_CODE %}
+    {% if LANGUAGE_CODE in RTL_LANGUAGES %}
+        <link rel="stylesheet" href="{% static 'admin/css/rtl_admin.css' %}">
+    {% endif %}
+{% endblock %}
+
+{% block extrahead %}
+    {{ block.super }}
+    {% get_current_language as LANGUAGE_CODE %}
+    {% if LANGUAGE_CODE in RTL_LANGUAGES %}
+        <script>
+            document.documentElement.setAttribute('dir', 'rtl');
+        </script>
+    {% endif %}
+{% endblock %}
+

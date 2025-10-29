@@ -1,0 +1,98 @@
+/* Sidebar Search Styles */
+
+.sidebar-search-wrapper {
+    padding: 10px 15px;
+    background: #fff;
+    border-bottom: 1px solid #dee2e6;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.sidebar-search {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.15s ease-in-out;
+    background: #f8f9fa;
+}
+
+.sidebar-search:focus {
+    outline: none;
+    border-color: #80bdff;
+    background: #fff;
+    box-shadow: 0 0 0 0.2rem rgba(0,123,255,.25);
+}
+
+.sidebar-search::placeholder {
+    color: #6c757d;
+}
+
+.menu-item-hidden {
+    display: none !important;
+}
+
+.no-results-message {
+    padding: 20px;
+    text-align: center;
+    color: #6c757d;
+    font-size: 14px;
+    display: none;
+}
+
+.no-results-message.show {
+    display: block;
+}
+
+/* Highlight matching text */
+.search-highlight {
+    background-color: #fff3cd;
+    color: #856404;
+    padding: 2px 4px;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+    .sidebar-search-wrapper {
+        background: #343a40;
+        border-bottom-color: #495057;
+    }
+    
+    .sidebar-search {
+        background: #495057;
+        border-color: #6c757d;
+        color: #fff;
+    }
+    
+    .sidebar-search:focus {
+        background: #343a40;
+        color: #fff;
+    }
+    
+    .search-highlight {
+        background-color: #664d03;
+        color: #fff3cd;
+    }
+}
+
+/* Animation for smooth transitions */
+.nav-item {
+    transition: opacity 0.2s ease-in-out;
+}
+
+.menu-item-hidden {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
+
+.main-footer .float-right {
+    display: none !important;
+}
