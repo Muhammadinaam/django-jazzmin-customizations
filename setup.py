@@ -12,7 +12,8 @@ setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/Muhammadinaam/django-jazzmin-customizations",
-    packages=find_packages(),
+    packages=['jazzmin_customizations'],
+    package_dir={'jazzmin_customizations': '.'},
     include_package_data=True,
     classifiers=[
         "Development Status :: 5 - Production/Stable",
